@@ -1,6 +1,5 @@
-package org.lfs.config;
+package org.lfs.common.entity;
 
-import org.lfs.common.AbstractEntity;
 
 public class FileColumn extends AbstractEntity {
 	

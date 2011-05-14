@@ -1,0 +1,29 @@
+<file-config>
+
+   
+
+    <file-set>
+
+	<src-dir>/home/karl/Large-File-Sorter/test/src/</src-dir>
+	<dest-dir>/home/karl/Large-File-Sorter/test/dest/</dest-dir>
+	<file-name>verylargefile.txt</file-name>
+
+	<column id="col1" start="0" end="14" type="string" description="this is the column1" sort="desc"
+		trim="yes"/>
+		<validate-format></validate-format>
+		<validate-value></validate-value>
+ 	<column id="col2" start="14" end="26" type="string" description="this is the column2"></column>
+	<column id="col3" start="26" end="43" type="string" description="this is the column3" ></column>
+    
+	<validate-file>
+		<line-char-length>30</line-char-length>
+	</validate-file>
+
+    </file-set>
+
+    <triggers>
+       <validate/>
+       <sort/>
+</triggers>
+</file-config>
+

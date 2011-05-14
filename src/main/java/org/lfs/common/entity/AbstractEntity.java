@@ -1,4 +1,5 @@
-package org.lfs.common;
+package org.lfs.common.entity;
+
 
 public abstract class AbstractEntity implements Entity {
 
