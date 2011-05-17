@@ -17,8 +17,9 @@
 
  */
 
-package org.lfs.config;
+package org.lfs.common.dao;
 
-public interface Configurable {
+public interface AppDAO {
+	
 
 }

@@ -1,0 +1,16 @@
+----------------------------------------------------------------
+Tue May 17 19:57:12 MYT 2011:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.1.2 - (1095077): instance a816c00e-012f-fdd1-2232-00000348c1f8 
+on database directory /home/karl/Large-File-Sorter/src/derbyDB  with class loader sun.misc.Launcher$AppClassLoader@f4a24a 
+Loaded from file:/home/karl/Large-File-Sorter/lib/derby.jar
+java.vendor=Sun Microsystems Inc.
+java.runtime.version=1.6.0_20-b20
+user.dir=/home/karl/Large-File-Sorter/src
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Tue May 17 19:57:21 MYT 2011: Shutting down Derby engine
+----------------------------------------------------------------
+Tue May 17 19:57:22 MYT 2011:
+Shutting down instance a816c00e-012f-fdd1-2232-00000348c1f8 on database directory /home/karl/Large-File-Sorter/src/derbyDB with class loader sun.misc.Launcher$AppClassLoader@f4a24a 
+----------------------------------------------------------------

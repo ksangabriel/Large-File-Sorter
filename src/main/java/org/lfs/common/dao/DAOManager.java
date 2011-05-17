@@ -17,41 +17,17 @@
 
  */
 
-package org.lfs.config.processor;
+package org.lfs.common.dao;
 
-import org.lfs.common.dao.AppDAO;
-import org.lfs.config.Configurable;
+import java.sql.Connection;
+import java.util.Properties;
 
-public abstract class GenericFileProcessor implements FileProcessor {
-
-	private FileReader fileReader = null;
-	private Configurable configurable = null;
-	private AppDAO appDAO = null;
+public interface DAOManager {
 	
-	@Override
-	public void process(Configurable configurable) throws Exception {
-		fileReader.readAndProcess(configurable);
-	}
+	public void startEmbeddedDataSource() ;
 	
-	public FileReader getFileReader() {
-		return fileReader;
-	}
-
-	public void setFileReader(FileReader fileReader) {
-		this.fileReader = fileReader;
-	}
-
-	public Configurable getConfigurable() {
-		return configurable;
-	}
-
-	public void setConfigurable(Configurable configurable) {
-		this.configurable = configurable;
-	}
+	public void stopEmbeddedDataSource() ;
 	
-	@Override
-	public void setAppDAO(AppDAO appDAO) {
-		this.appDAO = appDAO;
-		
-	}
+	public Connection getConnection(String dbName, Properties props);
+
 }
