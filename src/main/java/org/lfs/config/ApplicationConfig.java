@@ -10,7 +10,8 @@ import org.lfs.common.entity.FileConfig;
 import org.lfs.common.entity.FileSet;
 import org.xml.sax.SAXException;
 
-public class ApplicationConfig extends AbstractEntity {
+public class ApplicationConfig extends AbstractEntity 
+	implements Configurable {
 	
 	private int maxFileThreads = 5;
 	private String fileConfigPath = null;

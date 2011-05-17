@@ -18,13 +18,15 @@ public class Reader extends AbstractEntity implements Runnable {
 				new FileReader(fileSet.getSourceDir() + fileSet.getFileNameInRegExpr()));
 		
 		String line = null;
+		int count = 0;
 		while((line = br.readLine()) != null) {
-			// do something with line.
-			for(FileColumn fileCol : fileSet.getFileColumn()) {
-				System.out.println(fileCol.getId() + ":" + 
-				StringUtils.substring(line, fileCol.getStartIndex(), 
-						fileCol.getEndIndex()));
-			}
+			count++;
+			//for(FileColumn fileCol : fileSet.getFileColumn()) {
+			//	System.out.println(fileCol.getId() + ":" + 
+			//	StringUtils.substring(line, fileCol.getStartIndex(), 
+			//			fileCol.getEndIndex()));
+			//}
+			System.out.println("count:" + count);
 			
 			
     	}

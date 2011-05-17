@@ -6,12 +6,22 @@ import java.util.List;
 
 public class FileSet extends AbstractEntity {
 	
+	private List<String> fileNames = new ArrayList<String>();
 	private List<FileColumn> fileColumn = new ArrayList<FileColumn>(); 
     private int lineLength;
     private String sourceDir;
     private String destDir;
     private String fileNameInRegExpr;
 	
+	public List<String> getFileNames() {
+		return fileNames;
+	}
+
+	public void setFileNames(List<String> fileNames) {
+		this.fileNames = fileNames;
+	}
+
+    
 	public void addFileColumn(FileColumn fileColumn) {
 		this.fileColumn.add(fileColumn);
 	}
