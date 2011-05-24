@@ -80,11 +80,13 @@ public class Main extends AbstractEntity {
 	}
 	
 	
+	/* Should not be in a "File" validator because we are only checking the some of the contents of the xml file */ 
 	public boolean areColumnsNonOvelapping(Configurable configurable) {
 		FileSet fs = (FileSet) configurable;
 		
 		List<FileColumn> fileCols = fs.getFileColumns();
 		
+		// What if the user wants to specify the start index and the no. of characters?
 		for(int i = 0; i < fileCols.size(); i++) {
 			for(int j = i + 1; j < fileCols.size(); j++) {
 				if(fileCols.get(i).getStartIndex() >= fileCols.get(j).getStartIndex() 
