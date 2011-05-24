@@ -13,6 +13,8 @@ import org.lfs.config.ApplicationConfig;
 public class App {
     public static void main( String[] args ) throws Exception {
 
+    	// the application starts here
+    	
     	Main lfs = new Main();
     	lfs.process();
 
