@@ -22,16 +22,27 @@ package org.lfs.common.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.lfs.config.Configurable;
 
-public class FileSet extends AbstractEntity {
+
+public class FileSet extends AbstractEntity implements Configurable {
 	
 	private List<String> fileNames = new ArrayList<String>();
-	private List<FileColumn> fileColumn = new ArrayList<FileColumn>(); 
-    private int lineLength;
+	private List<FileColumn> fileColumns = new ArrayList<FileColumn>(); 
+	private List<FileValidation> fileValidation = new ArrayList<FileValidation>();
+	private int lineLength;
     private String sourceDir;
     private String destDir;
     private String fileNameInRegExpr;
 	
+	public void addFileValidation(FileValidation fileValidation) {
+		this.fileValidation.add(fileValidation);
+	}
+	
+	public List<FileValidation> getFileValidation() {
+		return fileValidation;
+	}    
+    
 	public List<String> getFileNames() {
 		return fileNames;
 	}
@@ -42,15 +53,15 @@ public class FileSet extends AbstractEntity {
 
     
 	public void addFileColumn(FileColumn fileColumn) {
-		this.fileColumn.add(fileColumn);
+		this.fileColumns.add(fileColumn);
 	}
 
-	public List<FileColumn> getFileColumn() {
-		return fileColumn;
+	public List<FileColumn> getFileColumns() {
+		return fileColumns;
 	}
 
-	public void setFileColumn(List<FileColumn> fileColumn) {
-		this.fileColumn = fileColumn;
+	public void setFileColumns(List<FileColumn> fileColumns) {
+		this.fileColumns = fileColumns;
 	}
 
 	public int getLineLength() {
@@ -83,5 +94,11 @@ public class FileSet extends AbstractEntity {
 
 	public void setFileNameInRegExpr(String fileNameInRegExpr) {
 		this.fileNameInRegExpr = fileNameInRegExpr;
+	}
+
+	@Override
+	public List<FileSet> getFileSet() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -27,4 +27,6 @@ public interface FileProcessor {
 	public void setAppDAO(AppDAO appDAO);
 
 	public void process(Configurable configurable) throws Exception;
+	
+	public void setFileReader(FileReader fileReader);
 }

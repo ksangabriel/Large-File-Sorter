@@ -27,6 +27,7 @@ public class FileColumn extends AbstractEntity {
 
 	private int startIndex;
 	private int endIndex;
+	private int dataLength;
 	private String type;
 	private String sortOrder;
 	private String validateValueFormat;
@@ -68,5 +69,11 @@ public class FileColumn extends AbstractEntity {
 	public void setValidateValue(String validateValue) {
 		this.validateValue = validateValue;
 	}
+	public void setDataLength(int dataLength) {
+		this.dataLength = dataLength;
+	}
+	public int getDataLength() {
+		return dataLength;
+	}	
 	
 }

@@ -21,12 +21,14 @@ package org.lfs.config;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import org.apache.commons.digester.Digester;
 import org.lfs.common.entity.AbstractEntity;
 import org.lfs.common.entity.FileColumn;
 import org.lfs.common.entity.FileConfig;
 import org.lfs.common.entity.FileSet;
+import org.lfs.common.entity.FileValidation;
 import org.xml.sax.SAXException;
 
 public class ApplicationConfig extends AbstractEntity 
@@ -63,9 +65,17 @@ public class ApplicationConfig extends AbstractEntity
         digester.addBeanPropertySetter( "file-config/file-set/src-dir", "sourceDir");
         digester.addBeanPropertySetter( "file-config/file-set/dest-dir", "destDir");
         digester.addBeanPropertySetter( "file-config/file-set/file-name", "fileNameInRegExpr");
+        digester.addObjectCreate( "file-config/file-set/validation", FileValidation.class );
+        digester.addBeanPropertySetter( "file-config/file-set/validation/validate", "validate" ); 
+        digester.addBeanPropertySetter( "file-config/file-set/validation/line-char-length", "characterCountPerLine" ); 
+        
+        digester.addSetProperties( "file-config/file-set/validation", "validate", "validate" );
+        digester.addSetProperties( "file-config/file-set/validation", "line-char-length", "characterCountPerLine" );
+        
         digester.addObjectCreate( "file-config/file-set/column", FileColumn.class );
         digester.addBeanPropertySetter( "file-config/file-set/column/id", "id" );
         digester.addBeanPropertySetter( "file-config/file-set/column/start", "startIndex" );
+        digester.addBeanPropertySetter( "file-config/file-set/column/length", "dataLength" );
         digester.addBeanPropertySetter( "file-config/file-set/column/end", "endIndex" );
         digester.addBeanPropertySetter( "file-config/file-set/column/type", "type" );
         digester.addBeanPropertySetter( "file-config/file-set/column/description", "description" );
@@ -76,6 +86,7 @@ public class ApplicationConfig extends AbstractEntity
         
         digester.addSetProperties( "file-config/file-set/column", "id", "id" );
         digester.addSetProperties( "file-config/file-set/column", "start", "startIndex" );
+        digester.addSetProperties( "file-config/file-set/column", "length", "dataLength" );
         digester.addSetProperties( "file-config/file-set/column", "end", "endIndex" );
         digester.addSetProperties( "file-config/file-set/column", "type", "type" );     
         digester.addSetProperties( "file-config/file-set/column", "description", "description" ); 
@@ -107,4 +118,9 @@ public class ApplicationConfig extends AbstractEntity
 		this.maxFileThreads = maxFileThreads;
 	}
 
+	@Override
+	public List<FileSet> getFileSet() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -19,6 +19,11 @@
 
 package org.lfs.config;
 
+import java.util.List;
+
+import org.lfs.common.entity.FileSet;
+
 public interface Configurable {
 
+	public List<FileSet> getFileSet();
 }

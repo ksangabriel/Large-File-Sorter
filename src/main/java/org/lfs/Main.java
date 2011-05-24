@@ -1,6 +1,7 @@
 package org.lfs;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
 
 import org.apache.commons.configuration.Configuration;
@@ -10,6 +11,9 @@ import org.lfs.common.entity.AbstractEntity;
 import org.lfs.common.entity.FileConfig;
 import org.lfs.common.entity.FileSet;
 import org.lfs.config.AppContext;
+import org.lfs.config.processor.FileProcessor;
+import org.lfs.config.processor.TextFileProcessor;
+import org.lfs.config.processor.TextFileReader;
 
 public class Main extends AbstractEntity {
 	
@@ -31,14 +35,22 @@ public class Main extends AbstractEntity {
 	}
 	
 	private void doIt() throws IOException {
-		Reader lfsReader = new Reader();
-		FileConfig fileConfig = appContext.getApplicationConfig().getFileConfig();
-		List<FileSet> colFileSet = fileConfig.getFileSet();
+		FileProcessor fileProc = new TextFileProcessor();
 		
-		for(FileSet fileSet : colFileSet) {
-			lfsReader.readFile(fileSet);
+		FileConfig fileConfig = appContext.getApplicationConfig().getFileConfig();
+		fileProc.setFileReader(new TextFileReader());
+		
+		Collection<FileSet> fileSetList = fileConfig.getFileSet();
+		for(FileSet fs: fileSetList) {
+		
+		try {
+			fileProc.process(fs);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
+		}
 		
 	}
 	
