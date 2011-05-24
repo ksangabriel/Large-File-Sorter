@@ -46,26 +46,28 @@ public class TextFileReader extends GenericFileReader {
 	
 	// true - file is valid
 	private boolean readFileValidate(Configurable configurable) throws IOException {
+		
 		FileSet fs = (FileSet)configurable;
 		
 		boolean validateFile = false;
-		int chars = -1;
+		int noOfCharsPerLine = -1;
 		
     	for(FileValidation fv: fs.getFileValidation()) {
     		validateFile = fv.isValidate();
-    		chars = fv.getCharacterCountPerLine();
-    		break;
+    		noOfCharsPerLine = fv.getCharacterCountPerLine();
+    		break; // we'll just get one
     	}
 
     	if(validateFile == true) {
     		BufferedReader br = new BufferedReader(
    				new FileReader(fs.getSourceDir() + fs.getFileNameInRegExpr()));
-		
+	
+    		
     		String line = null;			
     		while((line = br.readLine()) != null) {
-    			if(line.length() != chars) {
-	    			//error
-	    		} else {	    				
+    			if(line.length() != noOfCharsPerLine) {
+	    			//throw exception
+	    		} else {   				
 	    			for(FileColumn fc: fs.getFileColumns()) {
 	    				String tmp = line.substring(fc.getStartIndex(), fc.getEndIndex());
 	    					// validate tmp

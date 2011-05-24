@@ -22,10 +22,15 @@ package org.lfs.common.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.lfs.config.Configurable;
 
 
 public class FileSet extends AbstractEntity implements Configurable {
+	
+	private String DEFAULT_SOURCE_DIR = "files/src"; 
+	private String DEFAULT_DEST_DIR   = "files/dest"; 
+
 	
 	private List<String> fileNames = new ArrayList<String>();
 	private List<FileColumn> fileColumns = new ArrayList<FileColumn>(); 
@@ -77,7 +82,7 @@ public class FileSet extends AbstractEntity implements Configurable {
 	}
 
 	public void setSourceDir(String sourceDir) {
-		this.sourceDir = sourceDir;
+		this.sourceDir = StringUtils.defaultIfEmpty(sourceDir, this.DEFAULT_SOURCE_DIR);
 	}
 
 	public String getDestDir() {
@@ -85,7 +90,7 @@ public class FileSet extends AbstractEntity implements Configurable {
 	}
 
 	public void setDestDir(String destDir) {
-		this.destDir = destDir;
+		this.destDir = StringUtils.defaultIfEmpty(destDir, this.DEFAULT_DEST_DIR);
 	}
 
 	public String getFileNameInRegExpr() {

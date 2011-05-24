@@ -4,10 +4,25 @@
 
     <file-set>
 
+
+        <!-- 1. if not defined, use default source directory - done
+             2. if not defined, use default destination directory - done
+        --> 
 	<src-dir>/home/karl/Large-File-Sorter/test/src/</src-dir>
 	<dest-dir>/home/karl/Large-File-Sorter/test/dest/</dest-dir> 
-	<file-name>verylargefile.txt</file-name> <!-- could be regexpr, resulting to more than 1 file name  -->
+	
 
+	<!-- 1. could be regexpr, resulting to more than 1 file name  
+	     2. if not defined, will read all the files in the source directory
+        -->
+	<file-name>verylargefile.txt</file-name> 
+
+
+	<!-- 1. check if indexes are overlapping
+	     2. check if all ids are unique
+	     3. 	 
+	
+	-->
 	<column id="col1" start="0" end="14" type="string" description="this is the column1" sort="desc"
 		trim="yes"/>
 		<validate-format></validate-format>
@@ -15,14 +30,12 @@
  	<column id="col2" start="14" end="26" type="string" description="this is the column2"></column>
 	<column id="col3" start="26" end="43" type="string" description="this is the column3" ></column>
     
+	
+
 	<file-validation>
 		<validate>true</validate>	
 		<line-char-length>30</line-char-length>
 	</file-validation>
-
-
-
-
     </file-set>
 
     <triggers>

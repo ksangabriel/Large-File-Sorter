@@ -22,11 +22,9 @@ package org.lfs.config.processor;
 import org.lfs.common.dao.AppDAO;
 import org.lfs.config.Configurable;
 
-public interface FileProcessor {
+public interface FileProcessor extends Runnable {
 	
 	public void setAppDAO(AppDAO appDAO);
-
-	public void process(Configurable configurable) throws Exception;
 	
 	public void setFileReader(FileReader fileReader);
 }

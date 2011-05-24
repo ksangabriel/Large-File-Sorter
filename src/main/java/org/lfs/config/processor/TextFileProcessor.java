@@ -19,6 +19,21 @@
 
 package org.lfs.config.processor;
 
+import org.lfs.common.dao.AppDAO;
+import org.lfs.config.Configurable;
+
 public class TextFileProcessor extends GenericFileProcessor {
+
+	public TextFileProcessor(Configurable configurable, FileReader fileReader) {
+		this.configurable = configurable;
+		this.fileReader   = fileReader;
+	}
+
+
+	@Override
+	public void setAppDAO(AppDAO appDAO) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

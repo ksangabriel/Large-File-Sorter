@@ -8,9 +8,11 @@ import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.lfs.common.entity.AbstractEntity;
+import org.lfs.common.entity.FileColumn;
 import org.lfs.common.entity.FileConfig;
 import org.lfs.common.entity.FileSet;
 import org.lfs.config.AppContext;
+import org.lfs.config.Configurable;
 import org.lfs.config.processor.FileProcessor;
 import org.lfs.config.processor.TextFileProcessor;
 import org.lfs.config.processor.TextFileReader;
@@ -35,23 +37,70 @@ public class Main extends AbstractEntity {
 	}
 	
 	private void doIt() throws IOException {
-		FileProcessor fileProc = new TextFileProcessor();
+	
 		
 		FileConfig fileConfig = appContext.getApplicationConfig().getFileConfig();
-		fileProc.setFileReader(new TextFileReader());
+		
 		
 		Collection<FileSet> fileSetList = fileConfig.getFileSet();
 		for(FileSet fs: fileSetList) {
-		
-		try {
-			fileProc.process(fs);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			/* A fileset contains:
+			 * 1. a set of general rules to validate the files
+			 * 2. a set of column mappings 
+			 * 3. a set of rules for each column mapping to 
+			 *    validate the column's content
+			 * 4. a set of actions for each column to perform
+			 *    against the column's content
+			 * 5. a source directory where to read the files
+			 * 6. a destination directory where to save the processed files
+			 * 7. an ordered list of actions. Example:
+			 * 
+			 * 		<content-process index="0">
+			 * 			<action>validate</action>
+			 * 		</content-process>
+			 *   
+			 *      <content-process index="1">
+			 * 			<action>sort</action> <-- how is the sorting?
+			 * 		</content-process>  
+			 */
+			if(!areColumnsNonOvelapping(fs)) {
+				return; // or throw exception
+			}
+			
+			try {
+				TextFileProcessor tp = new TextFileProcessor(fs, new TextFileReader());
+				Thread t = new Thread(tp);
+				t.start();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
+	}
+	
+	
+	public boolean areColumnsNonOvelapping(Configurable configurable) {
+		FileSet fs = (FileSet) configurable;
+		
+		List<FileColumn> fileCols = fs.getFileColumns();
+		
+		for(int i = 0; i < fileCols.size(); i++) {
+			for(int j = i + 1; j < fileCols.size(); j++) {
+				if(fileCols.get(i).getStartIndex() >= fileCols.get(j).getStartIndex() 
+						&& fileCols.get(j).getStartIndex() <= fileCols.get(i).getEndIndex()) {
+					return false;
+				}
+				
+				if(fileCols.get(i).getStartIndex() >= fileCols.get(j).getEndIndex()  
+						&& fileCols.get(j).getEndIndex() <= fileCols.get(i).getEndIndex()) {
+					return false;
+				}
+				
+			}
 		}
 		
+		return true;
 	}
 	
 	public void process() throws ConfigurationException, IOException {

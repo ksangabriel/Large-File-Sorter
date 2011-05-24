@@ -23,26 +23,19 @@ import org.lfs.common.dao.AppDAO;
 import org.lfs.config.Configurable;
 
 public abstract class GenericFileProcessor implements FileProcessor {
+	
 
-	private FileReader fileReader = null;
-	private Configurable configurable = null;
+	protected FileReader fileReader = null;
+	protected Configurable configurable = null;
 	private AppDAO appDAO = null;
 	
-	@Override
-	public void process(Configurable configurable) throws Exception {
-		fileReader.readAndProcess(configurable);
-	}
-	
-	public FileReader getFileReader() {
-		return fileReader;
-	}
+//	@Override
+//	public void process(Configurable configurable) throws Exception {
+//		fileReader.readAndProcess(configurable);
+//	}
 
 	public void setFileReader(FileReader fileReader) {
 		this.fileReader = fileReader;
-	}
-
-	public Configurable getConfigurable() {
-		return configurable;
 	}
 
 	public void setConfigurable(Configurable configurable) {
@@ -50,8 +43,20 @@ public abstract class GenericFileProcessor implements FileProcessor {
 	}
 	
 	@Override
-	public void setAppDAO(AppDAO appDAO) {
-		this.appDAO = appDAO;
+	public void run() {
+		try {
+			this.process();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
+
+	private void process() throws Exception {
+		
+		// what if configurable is null?
+		fileReader.readAndProcess(configurable);
+	}
+
 }
