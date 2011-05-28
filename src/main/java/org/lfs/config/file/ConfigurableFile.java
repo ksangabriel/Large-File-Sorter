@@ -17,14 +17,19 @@
 
  */
 
-package org.lfs.config.processor;
+package org.lfs.config.file;
 
-import org.lfs.common.dao.AppDAO;
-import org.lfs.config.file.ConfigurableFile;
+import java.util.List;
 
-public interface FileProcessor extends Runnable {
-	
-	public void setAppDAO(AppDAO appDAO);
-	
-	public void setFileReader(FileReader fileReader);
+import org.lfs.common.entity.FileColumn;
+import org.lfs.common.entity.FileSet;
+import org.lfs.common.entity.FileValidation;
+import org.lfs.config.Configurable;
+
+public interface ConfigurableFile extends Configurable {
+	public List<FileValidation> getFileValidation();
+	public List<FileSet> getFileSet();
+	public String getSourceDir();
+	public String getFileNameInRegExpr();
+	public List<FileColumn> getFileColumns();
 }

@@ -19,9 +19,9 @@
 
 package org.lfs.config.processor;
 
-import org.lfs.config.Configurable;
+import org.lfs.config.file.ConfigurableFile;
 
 public interface FileReader {
 	
-	public void readAndProcess(Configurable configurable) throws Exception;
+	public void readAndProcess(ConfigurableFile configurable) throws Exception;
 }

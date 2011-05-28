@@ -25,7 +25,7 @@ import org.apache.commons.lang.StringUtils;
 import org.lfs.common.entity.FileColumn;
 import org.lfs.common.entity.FileConfig;
 import org.lfs.common.entity.FileSet;
-import org.lfs.config.Configurable;
+import org.lfs.config.file.ConfigurableFile;
 
 public class SQLTool {
 	
@@ -34,7 +34,7 @@ public class SQLTool {
 	private static String SQL_TYPE_STRING  = "string";
 	private static String SQL_TYPE_DATE    = "date"; // java.sql.Date
 	
-	public static String generateSQLCommand(String commandType, Configurable configurable) {
+	public static String generateSQLCommand(String commandType, ConfigurableFile configurable) {
 		
 		StringBuilder sb = new StringBuilder();
 		
@@ -66,7 +66,7 @@ public class SQLTool {
 		return sb.toString();
 	}
 	
-	private static String createSQLCreateTable(Configurable configurable) {
+	private static String createSQLCreateTable(ConfigurableFile configurable) {
 		
 		FileSet fs = (FileSet)configurable;
 		

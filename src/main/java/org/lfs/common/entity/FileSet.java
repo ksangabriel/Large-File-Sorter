@@ -23,10 +23,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.lfs.config.Configurable;
+import org.lfs.config.file.ConfigurableFile;
 
 
-public class FileSet extends AbstractEntity implements Configurable {
+public class FileSet extends AbstractEntity implements ConfigurableFile {
 	
 	private String DEFAULT_SOURCE_DIR = "files/src"; 
 	private String DEFAULT_DEST_DIR   = "files/dest"; 

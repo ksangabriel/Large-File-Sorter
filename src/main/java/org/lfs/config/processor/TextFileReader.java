@@ -30,54 +30,36 @@ import org.lfs.common.entity.FileColumn;
 import org.lfs.common.entity.FileConfig;
 import org.lfs.common.entity.FileSet;
 import org.lfs.common.entity.FileValidation;
-import org.lfs.config.Configurable;
+import org.lfs.config.file.ConfigurableFile;
 
 public class TextFileReader extends GenericFileReader {
 	
+	private FileValidator fileValidator = new TextFileValidator();
+	
 	@Override
-	public void readAndProcess(Configurable configurable) throws Exception {
-			String i = SQLTool.generateSQLCommand("create_table", configurable);
-			int ii = 0;
-			ii = 9;
+	public void readAndProcess(ConfigurableFile configurable) throws Exception {
 
+		if(!this.fileValidator.validateFile(configurable)) {
+			return;
+		}
+
+		
 		
 	}
 	
 	
 	// true - file is valid
-	private boolean readFileValidate(Configurable configurable) throws IOException {
+	private boolean readFileValidate(ConfigurableFile configurable) throws IOException {
 		
-		FileSet fs = (FileSet)configurable;
 		
-		boolean validateFile = false;
-		int noOfCharsPerLine = -1;
 		
-    	for(FileValidation fv: fs.getFileValidation()) {
-    		validateFile = fv.isValidate();
-    		noOfCharsPerLine = fv.getCharacterCountPerLine();
-    		break; // we'll just get one
-    	}
+		
+		return false;
 
-    	if(validateFile == true) {
-    		BufferedReader br = new BufferedReader(
-   				new FileReader(fs.getSourceDir() + fs.getFileNameInRegExpr()));
-	
-    		
-    		String line = null;			
-    		while((line = br.readLine()) != null) {
-    			if(line.length() != noOfCharsPerLine) {
-	    			//throw exception
-	    		} else {   				
-	    			for(FileColumn fc: fs.getFileColumns()) {
-	    				String tmp = line.substring(fc.getStartIndex(), fc.getEndIndex());
-	    					// validate tmp
-	    			}
-	    				// validate each column
-	    		}
-			}
-	    }	    	
-    	return false;
 	}
 	
 
+//	String i = SQLTool.generateSQLCommand("create_table", configurable);
+//	int ii = 0;
+//	ii = 9;
 }

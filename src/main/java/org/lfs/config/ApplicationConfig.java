@@ -29,10 +29,10 @@ import org.lfs.common.entity.FileColumn;
 import org.lfs.common.entity.FileConfig;
 import org.lfs.common.entity.FileSet;
 import org.lfs.common.entity.FileValidation;
+import org.lfs.config.file.ConfigurableFile;
 import org.xml.sax.SAXException;
 
-public class ApplicationConfig extends AbstractEntity 
-	implements Configurable {
+public class ApplicationConfig extends AbstractEntity  {
 	
 	private int maxFileThreads = 5;
 	private String fileConfigPath = null;
@@ -118,7 +118,7 @@ public class ApplicationConfig extends AbstractEntity
 		this.maxFileThreads = maxFileThreads;
 	}
 
-	@Override
+
 	public List<FileSet> getFileSet() {
 		// TODO Auto-generated method stub
 		return null;

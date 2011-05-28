@@ -12,7 +12,7 @@ import org.lfs.common.entity.FileColumn;
 import org.lfs.common.entity.FileConfig;
 import org.lfs.common.entity.FileSet;
 import org.lfs.config.AppContext;
-import org.lfs.config.Configurable;
+import org.lfs.config.file.ConfigurableFile;
 import org.lfs.config.processor.FileProcessor;
 import org.lfs.config.processor.TextFileProcessor;
 import org.lfs.config.processor.TextFileReader;
@@ -81,7 +81,7 @@ public class Main extends AbstractEntity {
 	
 	
 	/* Should not be in a "File" validator because we are only checking the some of the contents of the xml file */ 
-	public boolean areColumnsNonOvelapping(Configurable configurable) {
+	public boolean areColumnsNonOvelapping(ConfigurableFile configurable) {
 		FileSet fs = (FileSet) configurable;
 		
 		List<FileColumn> fileCols = fs.getFileColumns();

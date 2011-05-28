@@ -20,13 +20,13 @@
 package org.lfs.config.processor;
 
 import org.lfs.common.dao.AppDAO;
-import org.lfs.config.Configurable;
+import org.lfs.config.file.ConfigurableFile;
 
 public abstract class GenericFileProcessor implements FileProcessor {
 	
 
 	protected FileReader fileReader = null;
-	protected Configurable configurable = null;
+	protected ConfigurableFile configurable = null;
 	private AppDAO appDAO = null;
 	
 //	@Override
@@ -38,7 +38,7 @@ public abstract class GenericFileProcessor implements FileProcessor {
 		this.fileReader = fileReader;
 	}
 
-	public void setConfigurable(Configurable configurable) {
+	public void setConfigurable(ConfigurableFile configurable) {
 		this.configurable = configurable;
 	}
 	
