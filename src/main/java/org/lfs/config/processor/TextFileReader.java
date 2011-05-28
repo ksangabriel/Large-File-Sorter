@@ -19,10 +19,10 @@
 
 package org.lfs.config.processor;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Collection;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.lfs.common.dao.util.SQLTool;
@@ -37,25 +37,67 @@ public class TextFileReader extends GenericFileReader {
 	private FileValidator fileValidator = new TextFileValidator();
 	
 	@Override
-	public void readAndProcess(ConfigurableFile configurable) throws Exception {
-
-		if(!this.fileValidator.validateFile(configurable)) {
-			return;
+	protected boolean validateConfig(ConfigurableFile configurableFile) {
+		if(isColumnOverlapping(configurableFile)) {
+			return false;
 		}
-
-		
-		
+		return true;
+	}
+	
+	private boolean isColumnOverlapping(ConfigurableFile configurableFile) {
+    	// always check if column indexes overlap
+    	List<FileColumn> fileCols = configurableFile.getFileColumns();
+		for(int i = 0; i < fileCols.size(); i++) {
+			for(int j = i + 1; j < fileCols.size(); j++ ) {
+				int startIndex = fileCols.get(i).getStartIndex();
+				int endIndex = fileCols.get(i).getEndIndex();
+				
+				if( (startIndex > fileCols.get(j).getStartIndex()
+						&& startIndex < fileCols.get(j).getEndIndex()) 
+						|| 
+					(endIndex > fileCols.get(j).getStartIndex() 
+						&& endIndex < fileCols.get(j).getEndIndex())) {
+					// if startIndex is between other columns' startIndex and endIndex
+					// or
+					// if endIndex is between other columns' startIndex and endIndex
+					return true; 
+				}
+			}	
+		}
+		return false;
 	}
 	
 	
-	// true - file is valid
-	private boolean readFileValidate(ConfigurableFile configurable) throws IOException {
-		
-		
-		
-		
-		return false;
+	@Override
+	public void readAndProcess(ConfigurableFile configurableFile) throws Exception {
 
+		boolean error = false;
+		
+		// need to check if FileColumn indexes are overlapping to each others'
+		if(!validateConfig(configurableFile)) {
+			return;
+		}
+		
+		FileInputStream fstream = new FileInputStream(
+				configurableFile.getSourceDir() + 
+				configurableFile.getFileNameInRegExpr());
+		
+		DataInputStream in = new DataInputStream(fstream);
+		BufferedReader br = new BufferedReader(new InputStreamReader(in));
+		String strLine;
+		while ((strLine = br.readLine()) != null) {
+			
+			if(StringUtils.startsWith(strLine, "#~")) {
+				break; 
+			}
+			
+			if(!this.fileValidator.validateLine(configurableFile, strLine)) {
+				error = true;
+				break;
+			}
+		}
+		//Close the input stream
+		in.close();
 	}
 	
 

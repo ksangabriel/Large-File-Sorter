@@ -65,12 +65,13 @@ public class ApplicationConfig extends AbstractEntity  {
         digester.addBeanPropertySetter( "file-config/file-set/src-dir", "sourceDir");
         digester.addBeanPropertySetter( "file-config/file-set/dest-dir", "destDir");
         digester.addBeanPropertySetter( "file-config/file-set/file-name", "fileNameInRegExpr");
-        digester.addObjectCreate( "file-config/file-set/validation", FileValidation.class );
-        digester.addBeanPropertySetter( "file-config/file-set/validation/validate", "validate" ); 
-        digester.addBeanPropertySetter( "file-config/file-set/validation/line-char-length", "characterCountPerLine" ); 
         
-        digester.addSetProperties( "file-config/file-set/validation", "validate", "validate" );
-        digester.addSetProperties( "file-config/file-set/validation", "line-char-length", "characterCountPerLine" );
+        digester.addObjectCreate( "file-config/file-set/file-validation", FileValidation.class );
+        digester.addBeanPropertySetter( "file-config/file-set/file-validation/validate", "validate" ); 
+        digester.addBeanPropertySetter( "file-config/file-set/file-validation/line-char-length", "characterCountPerLine" );         
+        digester.addSetProperties( "file-config/file-set/file-validation", "validate", "validate" );
+        digester.addSetProperties( "file-config/file-set/file-validation", "line-char-length", "characterCountPerLine" );
+        digester.addSetNext( "file-config/file-set/file-validation", "addFileValidation" );
         
         digester.addObjectCreate( "file-config/file-set/column", FileColumn.class );
         digester.addBeanPropertySetter( "file-config/file-set/column/id", "id" );

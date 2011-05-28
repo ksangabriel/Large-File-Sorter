@@ -23,9 +23,6 @@ import org.lfs.config.file.ConfigurableFile;
 
 public abstract class GenericFileReader implements FileReader {
 	
+	protected abstract boolean validateConfig(ConfigurableFile configurable); 
 	
-	public void readAndProcess(ConfigurableFile configurable) throws Exception {
-		
-	}
-
 }
