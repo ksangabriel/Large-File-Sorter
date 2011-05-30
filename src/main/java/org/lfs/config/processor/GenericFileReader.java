@@ -20,9 +20,28 @@
 package org.lfs.config.processor;
 
 import org.lfs.config.file.ConfigurableFile;
+import org.lfs.config.processor.debug.FileDebug;
 
 public abstract class GenericFileReader implements FileReader {
 	
-	protected abstract boolean validateConfig(ConfigurableFile configurable); 
+	protected FileDebug userDebugMode = null;
+	protected FileDebug debugMode     = null;
 	
+	protected abstract boolean validateConfig(ConfigurableFile configurable);
+
+	public FileDebug getUserDebugMode() {
+		return userDebugMode;
+	}
+
+	public void setUserDebugMode(FileDebug userDebugMode) {
+		this.userDebugMode = userDebugMode;
+	}
+
+	public FileDebug getDebugMode() {
+		return debugMode;
+	}
+
+	public void setDebugMode(FileDebug debugMode) {
+		this.debugMode = debugMode;
+	} 
 }

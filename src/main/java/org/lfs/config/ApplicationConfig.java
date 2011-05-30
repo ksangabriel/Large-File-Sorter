@@ -65,6 +65,9 @@ public class ApplicationConfig extends AbstractEntity  {
         digester.addBeanPropertySetter( "file-config/file-set/src-dir", "sourceDir");
         digester.addBeanPropertySetter( "file-config/file-set/dest-dir", "destDir");
         digester.addBeanPropertySetter( "file-config/file-set/file-name", "fileNameInRegExpr");
+        digester.addSetProperties( "file-config/file-set", "userDebugMode", "userDebugMode" );
+        digester.addSetProperties( "file-config/file-set", "debugMode", "debugMode" );
+
         
         digester.addObjectCreate( "file-config/file-set/file-validation", FileValidation.class );
         digester.addBeanPropertySetter( "file-config/file-set/file-validation/validate", "validate" ); 

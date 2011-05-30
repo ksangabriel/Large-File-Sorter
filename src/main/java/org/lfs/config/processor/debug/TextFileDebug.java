@@ -17,18 +17,8 @@
 
  */
 
-package org.lfs.config.processor;
+package org.lfs.config.processor.debug;
 
-import org.lfs.config.file.ConfigurableFile;
-import org.lfs.config.processor.debug.FileDebug;
-
-public interface FileReader {
-	
-	public void readAndProcess(ConfigurableFile configurable) throws Exception;
-	public void setUserDebugMode(FileDebug value);
-	public FileDebug getUserDebugMode();
-
-	public void setDebugMode(FileDebug value);
-	public FileDebug getDebugMode();
+public class TextFileDebug extends GenericFileDebug {
 
 }

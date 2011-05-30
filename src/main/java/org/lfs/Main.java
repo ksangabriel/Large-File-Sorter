@@ -35,6 +35,8 @@ import org.lfs.config.file.ConfigurableFile;
 import org.lfs.config.processor.FileProcessor;
 import org.lfs.config.processor.TextFileProcessor;
 import org.lfs.config.processor.TextFileReader;
+import org.lfs.config.processor.debug.TextFileDebug;
+import org.lfs.config.processor.debug.TextFileUserDebug;
 
 public class Main extends AbstractEntity {
 	
@@ -87,7 +89,12 @@ public class Main extends AbstractEntity {
 			//}
 			
 			try {
-				TextFileProcessor tp = new TextFileProcessor(fs, new TextFileReader());
+				
+				TextFileReader txr = new TextFileReader();
+				txr.setDebugMode(new TextFileDebug()); // pluggable
+				txr.setDebugMode(new TextFileUserDebug()); // pluggable
+				
+				TextFileProcessor tp = new TextFileProcessor(fs, txr);
 				Thread t = new Thread(tp);
 				t.start();
 			} catch (Exception e) {

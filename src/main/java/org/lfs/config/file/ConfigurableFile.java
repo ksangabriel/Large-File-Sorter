@@ -25,8 +25,11 @@ import org.lfs.common.entity.FileColumn;
 import org.lfs.common.entity.FileSet;
 import org.lfs.common.entity.FileValidation;
 import org.lfs.config.Configurable;
+import org.lfs.config.processor.debug.FileDebug;
 
 public interface ConfigurableFile extends Configurable {
+	public boolean getUserDebugMode();
+	public boolean getDebugMode();
 	public List<FileValidation> getFileValidation();
 	public List<FileSet> getFileSet();
 	public String getSourceDir();

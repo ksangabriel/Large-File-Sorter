@@ -24,6 +24,8 @@ public class App {
 
     	// the application starts here
     	
+    	// need singletons
+    	
     	Main lfs = new Main();
     	lfs.process();
     }

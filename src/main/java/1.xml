@@ -2,7 +2,19 @@
 
    
 
-    <file-set>
+    <file-set userDebugMode="true" debugMode="true">
+    	<!-- userDebugMode should not be equivalent to verbose. when "true", it should aid users 
+    		to quickly verify the correctness of configuration using a small subset of data from the file. 
+    		
+    		Design:
+    		1. use the top 10 lines in the text file (whatever operations)
+    		2. display field-value and number of characters
+    		3. 
+    		
+    		
+    		debugMode, on the other hand, is something equivalent to verbose
+    		
+    		-->
 
 
         <!-- 1. if not defined, use default source directory - done

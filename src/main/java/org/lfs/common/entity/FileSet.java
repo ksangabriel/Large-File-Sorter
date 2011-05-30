@@ -39,7 +39,25 @@ public class FileSet extends AbstractEntity implements ConfigurableFile {
     private String sourceDir;
     private String destDir;
     private String fileNameInRegExpr;
+	private boolean userDebugMode;
+	private boolean debugMode;
 	
+	public boolean getDebugMode() {
+		return debugMode;
+	}
+
+	public void setDebugMode(boolean debugMode) {
+		this.debugMode = debugMode;
+	}
+
+	public boolean getUserDebugMode() {
+		return userDebugMode;
+	}
+
+	public void setUserDebugMode(boolean userDebugMode) {
+		this.userDebugMode = userDebugMode;
+	}
+
 	public void addFileValidation(FileValidation fileValidation) {
 		this.fileValidation.add(fileValidation);
 	}

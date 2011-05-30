@@ -23,13 +23,8 @@ import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.List;
-
 import org.apache.commons.lang.StringUtils;
-import org.lfs.common.dao.util.SQLTool;
 import org.lfs.common.entity.FileColumn;
-import org.lfs.common.entity.FileConfig;
-import org.lfs.common.entity.FileSet;
-import org.lfs.common.entity.FileValidation;
 import org.lfs.config.file.ConfigurableFile;
 
 public class TextFileReader extends GenericFileReader {
@@ -70,8 +65,8 @@ public class TextFileReader extends GenericFileReader {
 	
 	@Override
 	public void readAndProcess(ConfigurableFile configurableFile) throws Exception {
-
 		boolean error = false;
+		
 		
 		// need to check if FileColumn indexes are overlapping to each others'
 		if(!validateConfig(configurableFile)) {
@@ -91,7 +86,16 @@ public class TextFileReader extends GenericFileReader {
 				break; 
 			}
 			
-			if(!this.fileValidator.validateLine(configurableFile, strLine)) {
+			if(userDebugMode != null) {
+				userDebugMode.debugLine(configurableFile, strLine);
+			}
+			
+			if(debugMode != null) {
+				debugMode.debugLine(configurableFile, strLine);
+			}
+			
+			if(!this.fileValidator.validateLine(
+					configurableFile, strLine)) {
 				error = true;
 				break;
 			}
